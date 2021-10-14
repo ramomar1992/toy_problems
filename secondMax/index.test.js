@@ -25,8 +25,8 @@ const secondMax = function (array) {
       secondMax = firstMax;
       firstMax = array[i];
     } else if (
-      array[i] > secondMax ||
-      (firstMax === secondMax && array[i] !== secondMax)
+      (array[i] > secondMax && array[i] < firstMax) ||
+      (firstMax === secondMax && array[i] !== secondMax )
     ) {
       secondMax = array[i];
     } else {
@@ -45,5 +45,7 @@ describe("secondMax function", () => {
     expect(secondMax([100, 133, 50, 32])).toEqual(100);
     expect(secondMax([133, 50, 32])).toEqual(50);
     expect(secondMax([100, 100, 100])).toEqual(null);
+    expect(secondMax([100, 100, 50])).toEqual(50);
+    expect(secondMax([50,100, 100])).toEqual(50);
   });
 });
