@@ -17,7 +17,8 @@ secondMax([-1, -5, 2])== -1
  * @return {number} number
  */
 
-const secondMax = function (array) {
+
+const secondMax = function(array) {
   let firstMax = array[0];
   let secondMax = array[0];
   for (let i = 1; i < array.length; i++) {
@@ -36,8 +37,8 @@ const secondMax = function (array) {
   return secondMax !== firstMax ? secondMax : null;
 };
 
-describe("secondMax function", () => {
-  it("should return the second max number in each array of numbers", () => {
+describe('secondMax function', () => {
+  it('should return the second max number in each array of numbers', () => {
     expect(secondMax([1, 5, 2])).toEqual(2);
     expect(secondMax([-1, -5, 2])).toEqual(-1);
     expect(secondMax([-1, -5, 2, 5])).toEqual(2);
@@ -46,6 +47,6 @@ describe("secondMax function", () => {
     expect(secondMax([133, 50, 32])).toEqual(50);
     expect(secondMax([100, 100, 100])).toEqual(null);
     expect(secondMax([100, 100, 50])).toEqual(50);
-    expect(secondMax([50,100, 100])).toEqual(50);
+    expect(secondMax([50, 100, 100])).toEqual(50);
   });
 });
