@@ -1,3 +1,5 @@
+/* eslint-disable no-extend-native */
+/* eslint-disable no-unused-vars */
 /*
 Problem 1:
 Replace the native Array map function with your own.
@@ -9,17 +11,20 @@ See example usage to understand what arguments are passed to the callback.
 */
 
 Array.prototype.map = function(callback) {
-
+  const arr = [...this];
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    result.push(callback(arr[i], i, arr));
+  }
+  return result;
 };
 
 /*
 Example usage:
-var transform = function(element,index,array){
+*/
+const transform = function(element, index, array) {
   return array[index] + index + element;
 };
-["a","b","c"].map(transform); //should return ['a0a','b1b','c2c'];
-*/
-
 
 /*
 Problem 2:
@@ -32,27 +37,33 @@ Please see example usage to understand what should be passed to the callback.
 */
 
 const asyncSum = function(a, b, callback) {
-
+  setTimeout(() => {
+    if (typeof a !== 'number' || typeof b !== 'number') {
+      callback('Incorrect argument(s)', null);
+    } else {
+      callback(null, a + b);
+    }
+  }, 1000);
 };
-
 /*
 Example use:
 */
 
 const logNumber = function(error, number) {
   if (error) {
-    console.log('Error: ', error);
+    return 'Error: ' + error;
   } else {
-    console.log('The total is: ', number);
+    return 'The total is: ' + number;
   }
 };
 
-/*
-asyncSum(10,7,logNumber);//should print "The total is: 17" after 1 second
-asyncSum(10,"B",logNumber);
-//should print "Error: Incorrect argument(s)" after 1 second
-*/
-
+describe('Array map', () => {
+  it('should return a new array with the same number of elements', () => {
+    const res = ['a', 'b', 'c'].map(transform);
+    expect(res.length).toStrictEqual(3);
+    expect(res).toStrictEqual(['a0a', 'b1b', 'c2c']);
+  });
+});
 
 /*
 Problem 3 (ADVANCED):
